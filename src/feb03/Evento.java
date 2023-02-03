@@ -76,8 +76,8 @@ public class Evento {
 		if (date.isBefore(LocalDate.now()) || reserveSeats - numSeats < 0) {
 			throw new IllegalArgumentException(
 					"Impossibile disdire: evento già passato o nessuna prenotazione effettuata");
-		} else if (numSeats <= 0) {
-			throw new IllegalArgumentException("Impossibile prenotare: valore non valido");
+		} else if (numSeats < 0) {
+			throw new IllegalArgumentException("Impossibile disdire: valore non valido");
 		}
 		reserveSeats -= numSeats;
 	}
