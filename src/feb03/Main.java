@@ -22,34 +22,38 @@ public class Main {
 		 * formatter.format(Date.from(date.atStartOfDay(ZoneId.systemDefault()).
 		 * toInstant())); // valore formattato DD/MM/YYYY
 		 */
-		System.out.print("Inserisci la data (formato dd/MM/yyyy): ");
-		String dateString = sc.nextLine();
-		DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-		LocalDate localDate = LocalDate.parse(dateString, formatter);
-		System.out.print("Inserisci il numero di posti totali: ");
-		int totalSeats = sc.nextInt();
-
-		Evento evento = new Evento(title, localDate, totalSeats);
-
-		System.out.print("Inserisci il numero di prenotazioni: ");
-		int prenotazioni = sc.nextInt();
 		try {
-			evento.reserve(prenotazioni);
-		} catch (Exception e) {
-			System.out.println("Errore durante la prenotazione: " + e.getMessage());
-		}
 
-		System.out.println("Posti prenotati: " + evento.getReserveSeats());
-		System.out.println("Posti disponibili: " + evento.getRemainingSeats());
+			System.out.print("Inserisci la data (formato dd/MM/yyyy): ");
+			String dateString = sc.nextLine();
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+			LocalDate localDate = LocalDate.parse(dateString, formatter);
+			System.out.print("Inserisci il numero di posti totali: ");
+			int totalSeats = sc.nextInt();
 
-		System.out.print("Inserisci il numero di disdette: ");
-		int disdette = sc.nextInt();
-		try {
-			evento.countermand(disdette);
+			Evento evento = new Evento(title, localDate, totalSeats);
+
+			System.out.print("Inserisci il numero di prenotazioni: ");
+			int prenotazioni = sc.nextInt();
+			try {
+				evento.reserve(prenotazioni);
+			} catch (Exception e) {
+				System.out.println("Errore durante la prenotazione: " + e.getMessage());
+			}
+
+			System.out.println("Posti prenotati: " + evento.getReserveSeats());
+			System.out.println("Posti disponibili: " + evento.getRemainingSeats());
+
+			System.out.print("Inserisci il numero di disdette: ");
+			int disdette = sc.nextInt();
+			try {
+				evento.countermand(disdette);
+			} catch (Exception e) {
+				System.out.println("Errore durante la disdetta: " + e.getMessage());
+			}
+			System.out.println(evento);
 		} catch (Exception e) {
-			System.out.println("Errore durante la disdetta: " + e.getMessage());
+			System.out.println("Errore durante la creazione: " + e.getMessage());
 		}
-		System.out.println(evento);
-		
 	}
 }
