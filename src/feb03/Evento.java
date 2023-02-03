@@ -50,7 +50,7 @@ public class Evento {
 	}
 	//overloading reserve()
 	public void reserve(int numSeats) throws Exception {
-		if (date.isBefore(LocalDate.now()) || reserveSeats + numSeats >= totalSeats) {
+		if (date.isBefore(LocalDate.now()) || reserveSeats + numSeats > totalSeats) {
 			throw new IllegalArgumentException("Impossibile prenotare: evento già passato o posti esauriti");
 		} else if (numSeats <= 0) {
 			throw new Exception("Impossibile prenotare: valore non valido");
@@ -58,12 +58,22 @@ public class Evento {
 		reserveSeats += numSeats;
 	}
 
-	public void disdici() {
+	public void countermand() {
 		if (date.isBefore(LocalDate.now()) || reserveSeats <= 0) {
 			throw new IllegalArgumentException(
 					"Impossibile disdire: evento già passato o nessuna prenotazione effettuata");
 		}
 		reserveSeats--;
+	}
+	//overloading countermand()
+	public void countermand (int numSeats) {
+		if (date.isBefore(LocalDate.now()) || reserveSeats - numSeats < 0) {
+			throw new IllegalArgumentException(
+					"Impossibile disdire: evento già passato o nessuna prenotazione effettuata");
+		}else if (numSeats <= 0) {
+			throw new IllegalArgumentException("Impossibile prenotare: valore non valido");
+		}
+		reserveSeats -= numSeats;
 	}
 
 	@Override
@@ -77,6 +87,7 @@ public class Evento {
 		Evento ev= new Evento("mario", LocalDate.of(2024, 1, 1), 5);
 		try {
 			ev.reserve(5);
+			ev.countermand(2);
 			System.out.println(ev);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
