@@ -1,7 +1,9 @@
 package feb03;
 
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
@@ -31,7 +33,7 @@ public class Main {
 			System.out.print("Inserisci il numero di posti totali: ");
 			int totalSeats = sc.nextInt();
 
-			Evento evento = new Evento(title, localDate, totalSeats);
+			Concerto evento = new Concerto(title, localDate, totalSeats, LocalTime.of(17, 30), new BigDecimal("19.99"));
 
 			System.out.print("Inserisci il numero di prenotazioni: ");
 			int prenotazioni = sc.nextInt();
