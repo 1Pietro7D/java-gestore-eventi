@@ -2,6 +2,7 @@ package feb03;
 
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.Date;
 import java.util.Scanner;
 
@@ -16,7 +17,7 @@ public class Main {
 
 		System.out.print("Inserisci la data dell'evento (YYYY-MM-DD): ");
 		LocalDate date = LocalDate.parse(sc.nextLine());
-		// String formatDate = formatter.format(date);
+		String formatDate = formatter.format(Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant())); // valore formattato DD/MM/YYYY
 		System.out.print("Inserisci il numero di posti totali: ");
 		int totalSeats = sc.nextInt();
 
