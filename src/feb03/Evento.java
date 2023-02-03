@@ -2,7 +2,7 @@ package feb03;
 
 import java.time.LocalDate;
 
-public class Evento {
+public class Evento implements Comparable<Evento> {
 	private String title;
 	private LocalDate date;
 	private int totalSeats;
@@ -87,6 +87,10 @@ public class Evento {
 		return date.toString() + " + " + title + "+ Posti totali: " + totalSeats + " + Posti prenotati: "
 				+ reserveSeats +" - Posti rimanenti" + getRemainingSeats();
 	}
+	@Override 
+	public int compareTo(Evento otherEvent) {
+		return this.date.compareTo(otherEvent.date);
+	}// cosi il sort va sul ProgrammaEventi
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
