@@ -18,11 +18,11 @@ public class Evento {
 		this.reserveSeats = 0;
 	}
 
-	public String getTitolo() {
+	public String getTitle() {
 		return title;
 	}
 
-	public void setTitolo(String title) {
+	public void setTitle(String title) {
 		this.title = title;
 	}
 
@@ -34,7 +34,7 @@ public class Evento {
 		this.date = date;
 	}
 
-	public int geTotalSeats() {
+	public int getTotalSeats() {
 		return totalSeats;
 	}
 
@@ -48,7 +48,8 @@ public class Evento {
 		}
 		reserveSeats++;
 	}
-	//overloading reserve()
+
+	// overloading reserve()
 	public void reserve(int numSeats) throws Exception {
 		if (date.isBefore(LocalDate.now()) || reserveSeats + numSeats > totalSeats) {
 			throw new IllegalArgumentException("Impossibile prenotare: evento già passato o posti esauriti");
@@ -65,12 +66,17 @@ public class Evento {
 		}
 		reserveSeats--;
 	}
-	//overloading countermand()
-	public void countermand (int numSeats) {
+	public int getRemainingSeats() {
+		return getTotalSeats() - getReserveSeats();
+		
+	}
+
+	// overloading countermand()
+	public void countermand(int numSeats) {
 		if (date.isBefore(LocalDate.now()) || reserveSeats - numSeats < 0) {
 			throw new IllegalArgumentException(
 					"Impossibile disdire: evento già passato o nessuna prenotazione effettuata");
-		}else if (numSeats <= 0) {
+		} else if (numSeats <= 0) {
 			throw new IllegalArgumentException("Impossibile prenotare: valore non valido");
 		}
 		reserveSeats -= numSeats;
@@ -79,15 +85,16 @@ public class Evento {
 	@Override
 	public String toString() {
 		return date.toString() + " + " + title + "+ Posti totali: " + totalSeats + " + Posti prenotati: "
-				+ reserveSeats;
+				+ reserveSeats +" - Posti rimanenti" + getRemainingSeats();
 	}
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		Evento ev= new Evento("mario", LocalDate.of(2024, 1, 1), 5);
+		Evento ev = new Evento("mario", LocalDate.of(2024, 1, 1), 5);
 		try {
 			ev.reserve(5);
 			ev.countermand(2);
+			ev.countermand();
 			System.out.println(ev);
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
