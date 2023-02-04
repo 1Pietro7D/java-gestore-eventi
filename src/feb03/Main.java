@@ -18,14 +18,14 @@ public class Main {
 		System.out.print("Inserisci il titolo dell'evento: ");
 		String title = sc.nextLine();
 
-		/*
-		 * System.out.print("Inserisci la data dell'evento (YYYY-MM-DD): "); LocalDate
-		 * date = LocalDate.parse(sc.nextLine()); String formatDate =
-		 * formatter.format(Date.from(date.atStartOfDay(ZoneId.systemDefault()).
-		 * toInstant())); // valore formattato DD/MM/YYYY
-		 */
+		
 		try {
-
+			/*
+			 * System.out.print("Inserisci la data dell'evento (YYYY-MM-DD): "); LocalDate
+			 * date = LocalDate.parse(sc.nextLine()); String formatDate =
+			 * formatter.format(Date.from(date.atStartOfDay(ZoneId.systemDefault()).
+			 * toInstant())); // valore formattato DD/MM/YYYY
+			 */
 			System.out.print("Inserisci la data (formato dd/MM/yyyy): ");
 			String dateString = sc.nextLine();
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -56,6 +56,6 @@ public class Main {
 			System.out.println(evento);
 		} catch (Exception e) {
 			System.out.println("Errore durante la creazione: " + e.getMessage());
-		}
+		}finally{sc.close();};
 	}
 }
